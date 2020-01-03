@@ -1,0 +1,43 @@
+Put your answers to Questions 1-5 in this file. You will need to convert this file to a PDF for submission to CATe.
+Using LaTeX is recommended, but you can also export to PDF from the text editor of your choice.
+You should submit your answers.pdf file directly to CATe after submitting your revision ID for Question 6 from LabTS.
+
+
+Question 1:
+How big (how many bytes) is the program code section of the file hello.o?
+Explain how you arrived at your answer, including any mathematical conversions you had to make.
+
+Answer:
+ 
+ 
+Question 2:
+How many relocation records are there in the file hello.o? 
+Name them and explain how you arrived at your answer.
+
+Answer:
+
+
+Question 3:
+How many relocation records are there in the file hello (the result of linking hello.o)?
+Explain how you arrived at your answer. 
+
+Answer:
+
+
+Question 4:
+What happens if you try to link chello.o using ld without the writeexit.s file 
+(that is by running the command: ld chello.o -o chello similarly to how you did gor hello)?
+Explain what has happened and how the nm utility can be used to confirm this.
+
+Answer:
+
+ 
+Question 5:
+The last instruction in hello.s is an exit system call. 
+What would happen if you assembled, linked and ran this programs with that instruction commented out?
+(Hint: you might want to try this)
+Explain why this happens. Does the program still terminate?
+
+Answer:
+
+ 

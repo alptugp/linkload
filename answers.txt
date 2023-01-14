@@ -1,4 +1,4 @@
-Put your answers to Questions 1-5 in this file. You will need to convert this file to a PDF for submission to CATe.
+​​Put your answers to Questions 1-5 in this file. You will need to convert this file to a PDF for submission to CATe.
 Using LaTeX is recommended, but you can also export to PDF from the text editor of your choice.
 You should submit your answers.pdf file directly to CATe after submitting your revision ID for Question 6 from LabTS.
 
@@ -7,21 +7,34 @@ Question 1:
 How big (how many bytes) is the program code section of the file hello.o?
 Explain how you arrived at your answer, including any mathematical conversions you had to make.
 
-Answer:
+Answer: 
+It is 34 bytes. Using the information displayed by the 'objdump --all-headers hello.o' command, 
+the size and other information of the program code section of the file hello.o, which corresponds to .text section, 
+is seen under 'Sections:'. The size (in bytes) of .text section is shown to be 0x00000022, which is 34 in decimal 
+when converted from hexadecimal.
  
- 
+
 Question 2:
 How many relocation records are there in the file hello.o? 
 Name them and explain how you arrived at your answer.
 
-Answer:
+Answer: 
+There is only one relocation record in the file, whose name is 'message'. This can be seen from 
+the information displayed by the 'objdump --all-headers hello.o' command by counting 
+the entries under 'RELOCATION RECORDS FOR [.text]:' and looking at the names of the records
+under 'VALUE'.
 
 
 Question 3:
 How many relocation records are there in the file hello (the result of linking hello.o)?
 Explain how you arrived at your answer. 
 
-Answer:
+Answer: 
+There are no relocation records in the file hello as can be seen by the
+absence of relocation records in the information displayed by the 
+'objdump --all-headers hello' command. This is expected because after using the command 
+'ld hello.o -o hello' the Linux linker ld resolves all of the relocation records in 
+hello.o and produces a single file (hello) with a fixed start address.
 
 
 Question 4:
@@ -29,9 +42,18 @@ What happens if you try to link chello.o using ld without the writeexit.s file
 (that is by running the command: ld chello.o -o chello similarly to how you did gor hello)?
 Explain what has happened and how the nm utility can be used to confirm this.
 
-Answer:
+Answer: 
+The executable file chello is not produced if chello.o is attempted to be linked using ld
+without the writeexit.s file because an error occurs. The 'writeA' and 'exitA' function calls 
+in the 'main' function are undefined references since they are externally defined in the writeexit.s
+file. This can also be seen from the information displayed by the 'nm chello.o' command ('nm chello.o'
+displays all of the symbolls defined or used in 'chello.o'). The letter 'U' next to 'exitA' and 'writeA'
+shows that they are undefined references. Without linking chello.o with writeexit.o, 
+'writeA' and 'exitA' function calls remain as undefined references and thus casue the error. 
 
- 
+error or warning?
+start_?
+
 Question 5:
 The last instruction in hello.s is an exit system call. 
 What would happen if you assembled, linked and ran this programs with that instruction commented out?
@@ -39,5 +61,10 @@ What would happen if you assembled, linked and ran this programs with that instr
 Explain why this happens. Does the program still terminate?
 
 Answer:
+Segmentation fault occurs. This is because the processor does not know
+where the code in hello.s ends if the exit system call is not present. After it runs the 
+instructions in hello.s, it continues executing whatever is in memory after the code. 
+Eventually, it attempts accessing memory which isn't allowed to access and causes segmentation violation, which
+raises SIGBUS or SIGSEGV on Linux. This terminates the program when these are unhandled.
 
  

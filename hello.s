@@ -8,7 +8,7 @@ _start:
         int    $0x80              # make the system call
         movl   $0x0, %ebx         # the status to be returned by `exit'
         movl   $0x1, %eax         # eax = code for `exit' system call
-        int    $0x80              # make the system call
+        # int    $0x80              # make the system call
         .data
         .globl message
 message:        

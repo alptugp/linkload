@@ -51,8 +51,6 @@ displays all of the symbolls defined or used in 'chello.o'). The letter 'U' next
 shows that they are undefined references. Without linking chello.o with writeexit.o, 
 'writeA' and 'exitA' function calls remain as undefined references and thus casue the error. 
 
-error or warning?
-start_?
 
 Question 5:
 The last instruction in hello.s is an exit system call. 
@@ -62,9 +60,14 @@ Explain why this happens. Does the program still terminate?
 
 Answer:
 Segmentation fault occurs. This is because the processor does not know
-where the code in hello.s ends if the exit system call is not present. After it runs the 
+where the code in hello.s ends if the exit system call is not present. After it executes the 
 instructions in hello.s, it continues executing whatever is in memory after the code. 
-Eventually, it attempts accessing memory which isn't allowed to access and causes segmentation violation, which
-raises SIGBUS or SIGSEGV on Linux. This terminates the program when these are unhandled.
+Eventually, it attempts executing memory which is unmapped, marked as 'not executable' as code or not allowed to access
+and causes segmentation violation, which raises SIGBUS or 
+SIGSEGV on Linux. This terminates the program when these are unhandled.
 
  
+
+
+accessing memory which isn't allowed to access and causes segmentation violation, which
+raises 
